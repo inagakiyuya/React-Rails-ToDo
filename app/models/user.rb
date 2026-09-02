@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :posts
+  
   # パスワードを暗号化するメソッド
   has_secure_password
   
