@@ -28,7 +28,7 @@ class Api::V1::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      render json: @post, status: :updated
+      render json: @post, status: :ok
     else
       render json: @post.errors, status: :unprocessable_entity
     end
