@@ -11,9 +11,8 @@ Rails.application.routes.draw do
   # Api::V1 の名前空間に合わせ、かつ user に posts をネストさせる
   namespace :api do
     namespace :v1 do
-      resources :users, only: [:create] do
-        resources :posts # これで /api/v1/users/:user_id/posts というURLになります
-      end
+      resources :users, only: [:create]
+      resources :posts
     end
   end
 end

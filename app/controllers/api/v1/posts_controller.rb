@@ -1,14 +1,13 @@
 class Api::V1::PostsController < ApplicationController
-  before_action :set_user
   before_action :set_post, only: [:show, :update, :destroy]
 
   def index
-    @posts = @user.posts
+    @posts = Post.all
     render json: @posts
   end
 
   def create
-    @post = @user.posts.new(post_params)
+    @post = current_user.posts.new(post_params)
 
     if @post.save
       render json: @post, status: :created
@@ -35,10 +34,6 @@ class Api::V1::PostsController < ApplicationController
   end
 
   private
-
-  def set_user
-    @user = User.find(params[:user_id])
-  end
 
   def set_post
     @post = @user.posts.find(params[:id])
