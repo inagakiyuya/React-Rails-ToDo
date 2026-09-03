@@ -5,6 +5,15 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # ログインURLの追加（AuthenticationController用）
+  post 'auth/login', to: 'authentication#login'
+
+  # Api::V1 の名前空間に合わせ、かつ user に posts をネストさせる
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:create] do
+        resources :posts # これで /api/v1/users/:user_id/posts というURLになります
+      end
+    end
+  end
 end
