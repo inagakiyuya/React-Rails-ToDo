@@ -36,7 +36,7 @@ class Api::V1::PostsController < ApplicationController
   private
 
   def set_post
-    @post = @user.posts.find(params[:id])
+    @post = current_user.posts.find(params[:id])
   end
 
   def post_params
